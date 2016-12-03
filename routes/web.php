@@ -1,4 +1,5 @@
 <?php
+use App\Message;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +15,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/board', function () {
+    return redirect('/list');
+});
+
+Route::get('/list', 'MessageController@messageList');
+
+Route::get('/message/{messages}/edit', function (App\Message $messages) {
+    return view('board.edit', ['message' => $messages]);
+});
+
+Route::get('/message/{messages}/delete', 'MessageController@deleteMessage');
+
+Route::post('/message/add', 'MessageController@addMessage');
